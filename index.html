@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta>
+        <title>Todo JS App</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+
+        <h1>Pinfinity: A Todo App</h1>
+        <p>Easily manage task online and have fun !</p>
+
+        <input id="todo-new" class="input" type="text" name="list" value="" placeholder="Type your text" autocomplete="off"  />
+        <input id="date-picker" type="date"/>
+        <button class="custom-btn btn-6" onclick="addTodo()"> Add Todo </button>
+
+        <div id="todo-section"></div>
+
+        <footer>
+            <div>
+                <p style="font-size: 10px;">Develop By DevByDemand | GitHub: @imkraman | Mail: amit.krishnabihar@gmail.com</p>
+            </div>
+        </footer>
+
+        <!--<div>Join Scaler Bootcamp</div>-->
+
+        <script>
+           alert('Welcome to my ToDo App');
+           console.log('Dev: Aman Kumar');
+
+           //_____________________MODEL______________________________
+
+           //If localStorage has a saved todoArray, then use it.
+           //Otherwise use the given default array.
+           let todoArray;
+
+           //Retrieve 
+           let saved = JSON.parse(localStorage.getItem('todoArray'));
+           if(Array.isArray(saved)){
+            todoArray = saved;
+           }else{
+            todoArray = [
+                {title: 'Join Scaler Bootcamp', dueDate: '2022-09-09', id:'id1'},
+                {title: 'Newton School', dueDate:'2022-09-10', id:'id2'},
+                {title: 'Deploy Cab Flutter App', dueDate: '2022-09-11', id:'id3'} ];
+           }
+           
+           //JS array push=add & pop=delete the last pop (pre-defined function or methods)
+           todoArray.push('Infosys');
+           todoArray.pop();
+           render();
+
+           function pushTodo(title,dueDate) {
+            const id = '' + new Date().getTime(); //this return number, for string type return add ( + '' )
+
+            //this for add that user-value to js array
+            todoArray.push( {
+                    title: title,
+                    dueDate: dueDate,
+                    id: id
+                } );
+
+            saveTodo();
+           }
+
+           function removeItem (idToDelete){
+            todoArray = todoArray.filter(
+                function (todo){
+                    if(todo.id === idToDelete){
+                        return false;
+                    }else{
+                        return true;
+                    }
+                }
+            );
+            saveTodo(); //2-here modification done to array so save it.
+           }
+
+           function saveTodo () {
+            localStorage.setItem('todoArray', JSON.stringify(todoArray));
+           }
+
+
+           //_____________________VIEW_________________________
+
+           function render() {
+            //reset the list
+            document.getElementById('todo-section').innerHTML = '';
+
+            // put each list element(here array of obj) to html
+            todoArray.forEach ( 
+
+                function (todo /*its parameter name only=analogy to list item*/) {
+                    let element = document.createElement('div');
+                    element.innerText = todo.title +'  '+ todo.dueDate; // 1=operation
+
+                    let deleteButton = document.createElement('button');
+                    deleteButton.innerText = 'Delete';
+                    deleteButton.onclick = deleteTodo; // fn call using DOM
+                    deleteButton.id = todo.id;
+                    deleteButton.style = ' margin-left: 12px; ';
+
+                    deleteButton.classList.add('custom-btn');
+                    deleteButton.classList.add('btn-13');
+
+                    element.appendChild(deleteButton); // 2=operation
+                    element.classList.add('DOM-div');
+                
+                    let todoSection = document.getElementById('todo-section');
+                    todoSection.appendChild(element); // 3=insert to div in html
+                }
+            );
+           }
+
+           //____________________CONTROLLER_______________________
+
+           //call this fn for onclick addition of user new todo item
+           function addTodo () {
+            //this is to fetch element=textbox from html into js
+            const todoItems = document.getElementById('todo-new');
+            const title = todoItems.value;
+
+            const datePicker = document.getElementById('date-picker');
+            const dueDate = datePicker.value;
+
+            pushTodo(title, dueDate);
+
+            render (); /* it display whole array again.so 1st clear only todo list screen.
+                          wait, then create special div that contain todo item list*/
+            
+           }
+
+           function deleteTodo( event /* Its an obj defined for onclick */ ) {
+            console.log('Just "User-created" fn called for deleting...');
+            //console.log(event);
+            const deleteButton = event.target;
+            const idToDelete = deleteButton.id; 
+            //getting out id from html element return string = was not equal to number type id that we first
+            //assigned to id so we changed the type.
+            
+            removeItem(idToDelete);
+            render ();
+           }
+
+           /*
+            let todo1 = 'Join Scaler Bootcamp';
+            let todo2 = 'Newton School';
+            let todo3 = 'Deploy Cab Flutter App';
+
+            let element  = document.createElement('div'); // this create HTML element in JS
+            element.innerText = 'Below are Todo List :'; // this set the text inside the div tag
+            document.body.appendChild(element); // this add element to body after all other child/tag
+
+            function addToDo(todoTitle) { // inside parenthesis: called parameter/variable
+                let element = document.createElement('div');
+                element.innerText = todoTitle;
+                document.body.appendChild(element);
+            }
+
+            addToDo(todo1);
+            addToDo(todo2);
+            addToDo(todo3);
+            */
+
+            /* JS loop for adding each array element to **last** of html document.
+           todoArray.forEach(
+            //create fn for displaying js array inputs by creating div of value in html
+            function (todoTitle) {
+            let element = document.createElement('div');
+            element.innerText = todoTitle;
+            document.body.appendChild(element);
+           } ); */
+        </script>
+    </body>
+</html>
