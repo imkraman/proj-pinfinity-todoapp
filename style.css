@@ -3,7 +3,14 @@ body {
     text-align: center;
     align-items: center;
     position:relative;
+    margin: 10px auto ;
+    padding-inline-start: 2%;
+  }
+div {
+    text-align: center;
+    position: relative;
     margin: auto;
+    padding: 10px;
   }
 
 h1 {
@@ -27,13 +34,13 @@ p:hover
 } 
 
 .DOM-div {
-    width:max-content;
-    margin: 10px auto;
+    width: fit-content;
+    margin: 10px;
     text-align: center;
+    align-items: center;
     font-size: medium;
     font-weight: 500;
     font-family:'open sans';
-    padding-left: 5%;
     
     border-radius: 20px;
     box-shadow:  16px 16px 21px #e0f4f4,
@@ -43,13 +50,14 @@ p:hover
  
 #todo-section
 {
-    width:fit-content;
-    margin: 50px auto;
+    margin: 10px;
     text-align: center;
-    padding-left: 20%;
-    padding-right: 20%;
-    padding-top: 2%;
-    padding-bottom: 2%;
+    align-items: center;
+    position: relative;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 5%;
+    padding-bottom: 5%;
 
     border-radius: 50px;
     background: #cff7f2;
