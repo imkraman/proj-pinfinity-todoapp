@@ -33,9 +33,13 @@ p:hover
     height: 100%;
 } 
 
+} 
+
 .DOM-div {
-    width: fit-content;
-    margin: 10px;
+  margin: auto;
+  width: fit-content;
+  padding: 2%;
+    position: relative;
     text-align: center;
     align-items: center;
     font-size: medium;
@@ -50,12 +54,13 @@ p:hover
  
 #todo-section
 {
-    margin: 10px;
+  margin: auto;
+  width: 50%;
     text-align: center;
     align-items: center;
     position: relative;
-    padding-left: 10%;
-    padding-right: 10%;
+    padding-left: 20%;
+    padding-right: 20%;
     padding-top: 5%;
     padding-bottom: 5%;
 
